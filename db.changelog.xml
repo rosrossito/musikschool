@@ -1,0 +1,46 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <include file="v1_3/db.changelog.create-schema.xml" relativeToChangelogFile="true"/>
+    <!--<include file="v1_3/db.changelog-insert-image-data.xml" relativeToChangelogFile="true"/>-->
+
+    <include file="v1_3/db.changelog.create-applications-tables.xml" relativeToChangelogFile="true"/>
+
+    <include file="v1_3/db.changelog.insert-data.xml" relativeToChangelogFile="true"/>
+
+    <include file="v1_3/db.changelog.insert-data-image.xml" relativeToChangelogFile="true"/>
+
+    <include file="v1_3/db.changelog.create-foreign-keys.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.unique-biginteger-sequence.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.users-table-updates.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.set-autoincrement.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.changelog-extend-events-table.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.changelog-extend-events-table-fkeys.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.add-hashcodefields.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.applications-bugfix.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.add-email-n-region.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.add-isHead-to-teacher.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.changelog-20171117-applicants-update-dob.xml" relativeToChangelogFile="true"/>
+    <!--<include file="v1_3/db.add-url-cloudid-to-img.xml" relativeToChangelogFile="true"/>-->
+    <include file="v1_3/db.add-table-language.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.changelog.insert-data-into-language.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.changelog.add-phoneColumn-to-usersTable.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.add-table-history.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.changelog.create-table-admission-rules.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.changelog.insert-testing-data.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.add-lang_id-to-department_and_staff.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.changelog.add-table-deprtment_staff.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.set-autoincrement-new-tables.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.add-table-education_type.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.add-eduсation_type_id-to-department.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.update-table-education_type.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.add-table-education.xml" relativeToChangelogFile="true"/>
+    <include file="v1_3/db.add-table-alumni.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>

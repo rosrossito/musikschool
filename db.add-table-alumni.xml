@@ -1,0 +1,172 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="Ruslan_Omelchenko" id="1606000061118-01">
+        <createTable tableName="alumni">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true"
+                             primaryKeyName="pk_id_alumni"/>
+            </column>
+            <column name="image_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Ruslan_Omelchenko" id="1606000061118-02">
+        <createTable tableName="language_alumni">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true"
+                             primaryKeyName="pk_id_language_alumni"/>
+            </column>
+            <column name="alumni_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="language_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="header" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="content" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Ruslan_Omelchenko" id="1606000061118-03">
+        <addForeignKeyConstraint baseColumnNames="image_id" baseTableName="alumni"
+                                 constraintName="fki_image_id_alumni" deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="image"/>
+    </changeSet>
+
+    <changeSet author="Ruslan_Omelchenko" id="1606000061118-04">
+        <addForeignKeyConstraint baseColumnNames="language_id" baseTableName="language_alumni"
+                                 constraintName="fki_language_id_language_alumni" deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="language"/>
+    </changeSet>
+
+    <changeSet author="Ruslan_Omelchenko" id="1606000061118-05">
+        <addForeignKeyConstraint baseColumnNames="alumni_id" baseTableName="language_alumni"
+                                 constraintName="fki_alumni_id_language_alumni" deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="alumni"/>
+    </changeSet>
+
+
+    <changeSet author="Ruslan_Omelchenko" id="1606000061118-06">
+        <sql dbms="postgresql"
+             endDelimiter=";"
+             splitStatements="true"
+             stripComments="true">
+            BEGIN;
+            set schema '${database.defaultSchemaName}';
+            alter table alumni alter column id set default next_id();
+            alter table language_alumni alter column id set default next_id();
+            COMMIT;
+        </sql>
+    </changeSet>
+
+    <changeSet author="Ruslan_Omelchenko" id="1606000061118-07">
+        <sql dbms="postgresql"
+             endDelimiter=";"
+             splitStatements="true"
+             stripComments="true">
+            BEGIN;
+            set schema '${database.defaultSchemaName}';
+            alter table alumni ALTER COLUMN id SET DEFAULT nextval('alumni_id_seq'::regclass);
+            alter table language_alumni ALTER COLUMN id SET DEFAULT nextval('language_alumni_id_seq'::regclass);
+            SELECT setval('alumni_id_seq', (SELECT MAX(id) FROM alumni));
+            SELECT setval('language_alumni_id_seq', (SELECT MAX(id) FROM language_alumni));
+            COMMIT;
+        </sql>
+    </changeSet>
+
+    <changeSet author="Ruslan_Omelchenko" id="1606000061118-08">
+        <insert tableName="image">
+            <column name="id" valueNumeric="600"/>
+            <column name="title" value="title0"/>
+            <column name="url"
+                    value="http://res.cloudinary.com/musicschool/image/upload/v1528723505/0_bcw8rv.jpg"/>
+            <column name="cloudId" value="0_bcw8rv.jpg"/>
+        </insert>
+        <insert tableName="image">
+            <column name="id" valueNumeric="601"/>
+            <column name="title" value="title0"/>
+            <column name="url"
+                    value="http://res.cloudinary.com/musicschool/image/upload/v1528723508/1_x2vogo.jpg"/>
+            <column name="cloudId" value="1_x2vogo.jpg"/>
+        </insert>
+        <insert tableName="image">
+            <column name="id" valueNumeric="602"/>
+            <column name="title" value="title0"/>
+            <column name="url"
+                    value="http://res.cloudinary.com/musicschool/image/upload/v1528723510/2_r72far.jpg"/>
+            <column name="cloudId" value="2_r72far.jpg"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="Ruslan_Omelchenko" id="1606000061118-09">
+        <insert tableName="alumni">
+            <column name="id" valueNumeric="1"/>
+            <column name="image_id" valueNumeric="600"/>
+        </insert>
+        <insert tableName="alumni">
+            <column name="id" valueNumeric="2"/>
+            <column name="image_id" valueNumeric="601"/>
+        </insert>
+        <insert tableName="alumni">
+            <column name="id" valueNumeric="3"/>
+            <column name="image_id" valueNumeric="602"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet author="Ruslan_Omelchenko" id="1606000061118-10">
+        <insert tableName="language_alumni">
+            <column name="alumni_id" valueNumeric="1"/>
+            <column name="language_id" valueNumeric="1"/>
+            <column name="header" value="title1"/>
+            <column name="content"
+                    value="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad amet consequuntur cumque dicta,
+                     dolorem eligendi eveniet explicabo harum impedit incidunt natus, nesciunt non placeat possimus
+                     quam qui ullam veritatis? Veritatis?"/>
+        </insert>
+
+
+        <insert tableName="language_alumni">
+            <column name="alumni_id" valueNumeric="2"/>
+            <column name="language_id" valueNumeric="1"/>
+            <column name="header" value="title2"/>
+            <column name="content"
+                    value="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad amet consequuntur cumque dicta,
+                     dolorem eligendi eveniet explicabo harum impedit incidunt natus, nesciunt non placeat possimus
+                     quam qui ullam veritatis? Veritatis?"/>
+        </insert>
+
+
+        <insert tableName="language_alumni">
+            <column name="alumni_id" valueNumeric="3"/>
+            <column name="language_id" valueNumeric="2"/>
+            <column name="header" value="title3"/>
+            <column name="content"
+                    value="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad amet consequuntur cumque dicta,
+                     dolorem eligendi eveniet explicabo harum impedit incidunt natus, nesciunt non placeat possimus
+                     quam qui ullam veritatis? Veritatis?"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
